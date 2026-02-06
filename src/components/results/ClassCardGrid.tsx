@@ -3,9 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { useStore } from '../../store/index.ts';
 import { recalculateSummaries } from '../../utils/summary-calculator.ts';
 import { ClassCard } from './ClassCard.tsx';
+import { EmptyState } from '../common/EmptyState.tsx';
 
 export function ClassCardGrid() {
   const { t } = useTranslation('results');
+  const { t: tCommon } = useTranslation();
   const classes = useStore((s) => s.classes);
   const moveStudent = useStore((s) => s.moveStudent);
   const setSummaries = useStore((s) => s.setSummaries);
@@ -34,7 +36,9 @@ export function ClassCardGrid() {
     }
   }
 
-  if (!classes) return null;
+  if (!classes || Object.keys(classes).length === 0) {
+    return <EmptyState title={tCommon('emptyResultsTitle')} subtitle={tCommon('emptyResultsSubtitle')} />;
+  }
 
   const sortedEntries = Object.entries(classes).sort(
     ([a], [b]) => Number(a) - Number(b),

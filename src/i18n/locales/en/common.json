@@ -21,5 +21,12 @@
   "replaceExisting": "Replace All",
   "duplicateWarning": "{{count}} student(s) already exist and will be overridden:",
   "confirmOverride": "Override & Add",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "errorBoundaryTitle": "Something went wrong",
+  "errorBoundaryMessage": "An unexpected error occurred. Please reload the page to continue.",
+  "reload": "Reload",
+  "emptyGridTitle": "No students yet",
+  "emptyGridSubtitle": "Import a file or add rows manually",
+  "emptyResultsTitle": "No assignment results",
+  "emptyResultsSubtitle": "Go back and assign students to see results here"
 }

@@ -45,6 +45,7 @@ export function ResultsPage() {
 
   const handleRerun = async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await assignStudents(students, classCount);
       setAssignmentResult(response.classes, response.summaries);
@@ -59,7 +60,7 @@ export function ResultsPage() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
+      <div className="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
         <button
           onClick={() => navigate('/')}
           className="rounded bg-gray-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-700"
@@ -86,11 +87,11 @@ export function ResultsPage() {
         </button>
       </div>
 
-      <div className="flex min-h-0 flex-1">
-        <div className="min-h-0 flex-[3] overflow-y-auto p-4">
+      <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
+        <div className="min-h-0 overflow-y-auto p-4 lg:flex-[3]">
           <ClassCardGrid />
         </div>
-        <div className="min-h-0 flex-[2] overflow-y-auto border-s border-gray-200 bg-white p-4">
+        <div className="min-h-0 overflow-y-auto border-s border-gray-200 bg-white p-4 lg:flex-[2]">
           <h2 className="mb-4 text-lg font-semibold text-gray-800">
             {tResults('statistics')}
           </h2>

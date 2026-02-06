@@ -39,7 +39,10 @@ export function ClassCard({ classId, students, allClasses: _allClasses }: ClassC
       <div
         ref={setNodeRef}
         onDoubleClick={() => setIsDetailOpen(true)}
-        className={`rounded-lg border-2 bg-white p-4 shadow-sm transition-colors ${isOver ? 'border-blue-400 bg-blue-50' : 'border-gray-200'}`}
+        onKeyDown={(e) => { if (e.key === 'Enter') setIsDetailOpen(true); }}
+        tabIndex={0}
+        role="button"
+        className={`rounded-lg border-2 bg-white p-4 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${isOver ? 'border-blue-400 bg-blue-50' : 'border-gray-200'}`}
       >
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-lg font-semibold text-gray-800">

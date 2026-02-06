@@ -21,5 +21,12 @@
   "replaceExisting": "החלף הכל",
   "duplicateWarning": "{{count}} תלמידים כבר קיימים וידרסו:",
   "confirmOverride": "דרוס והוסף",
-  "cancel": "ביטול"
+  "cancel": "ביטול",
+  "errorBoundaryTitle": "משהו השתבש",
+  "errorBoundaryMessage": "אירעה שגיאה בלתי צפויה. אנא טען מחדש את הדף כדי להמשיך.",
+  "reload": "טען מחדש",
+  "emptyGridTitle": "אין תלמידים עדיין",
+  "emptyGridSubtitle": "ייבא קובץ או הוסף שורות ידנית",
+  "emptyResultsTitle": "אין תוצאות שיבוץ",
+  "emptyResultsSubtitle": "חזור אחורה ושבץ תלמידים כדי לראות תוצאות כאן"
 }

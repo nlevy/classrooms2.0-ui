@@ -12,7 +12,7 @@ export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport
   const { t: tCommon } = useTranslation();
 
   return (
-    <div className="flex items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
+    <div className="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
       {onImport && (
         <button
           type="button"

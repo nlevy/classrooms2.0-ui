@@ -10,4 +10,15 @@ export default defineConfig({
       '/template': 'http://localhost:5000',
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-grid': ['ag-grid-community', 'ag-grid-react'],
+          'vendor-charts': ['recharts'],
+          'vendor-xlsx': ['xlsx'],
+        },
+      },
+    },
+  },
 })

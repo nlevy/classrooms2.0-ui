@@ -14,6 +14,7 @@ export function useAssignment() {
 
   const assign = async () => {
     setLoading(true);
+    setError(null);
     try {
       const response = await assignStudents(students, classCount);
       setAssignmentResult(response.classes, response.summaries);

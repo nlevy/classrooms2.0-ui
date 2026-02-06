@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Student } from '../../types/student.ts';
 
@@ -28,11 +29,22 @@ function FriendCell({ friendName, classmateNames }: { friendName: string; classm
 export function ClassDetailDialog({ open, onClose, classId, students, classmateNames }: ClassDetailDialogProps) {
   const { t } = useTranslation('results');
   const { t: tGrid } = useTranslation('grid');
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      closeButtonRef.current?.focus();
+    }
+  }, [open]);
 
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      onClick={onClose}
+      onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}
+    >
       <div
         className="mx-4 max-h-[85vh] w-full max-w-6xl overflow-hidden rounded-lg bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
@@ -45,6 +57,7 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
             </span>
           </h2>
           <button
+            ref={closeButtonRef}
             onClick={onClose}
             className="rounded-md p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
             aria-label={t('close')}

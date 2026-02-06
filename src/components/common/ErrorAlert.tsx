@@ -17,6 +17,7 @@ export function ErrorAlert() {
       <button
         onClick={() => setError(null)}
         className="text-red-400 hover:text-red-600"
+        aria-label="Dismiss error"
       >
         x
       </button>

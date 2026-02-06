@@ -113,7 +113,10 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      onKeyDown={(e) => { if (e.key === 'Escape') handleClose(); }}
+    >
       <div className="mx-4 w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
         <h2 className="mb-4 text-lg font-semibold text-gray-800">
           {t('importFile')}

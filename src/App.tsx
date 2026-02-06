@@ -1,9 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, Suspense, lazy } from 'react';
 import { PageLayout } from './components/common/PageLayout';
+import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { DataEntryPage } from './pages/DataEntryPage';
-import { ResultsPage } from './pages/ResultsPage';
 import { useStore } from './store';
+
+const ResultsPage = lazy(() =>
+  import('./pages/ResultsPage').then((m) => ({ default: m.ResultsPage })),
+);
 
 export default function App() {
   const language = useStore((s) => s.language);
@@ -16,10 +20,14 @@ export default function App() {
   return (
     <BrowserRouter>
       <PageLayout>
-        <Routes>
-          <Route path="/" element={<DataEntryPage />} />
-          <Route path="/results" element={<ResultsPage />} />
-        </Routes>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="flex flex-1 items-center justify-center text-gray-400">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<DataEntryPage />} />
+              <Route path="/results" element={<ResultsPage />} />
+            </Routes>
+          </Suspense>
+        </ErrorBoundary>
       </PageLayout>
     </BrowserRouter>
   );
