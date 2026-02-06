@@ -9,6 +9,14 @@ const ResultsPage = lazy(() =>
   import('./pages/ResultsPage').then((m) => ({ default: m.ResultsPage })),
 );
 
+const LandingPage = lazy(() =>
+  import('./pages/LandingPage').then((m) => ({ default: m.LandingPage })),
+);
+
+const AboutPage = lazy(() =>
+  import('./pages/AboutPage').then((m) => ({ default: m.AboutPage })),
+);
+
 export default function App() {
   const language = useStore((s) => s.language);
 
@@ -19,16 +27,30 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <PageLayout>
-        <ErrorBoundary>
-          <Suspense fallback={<div className="flex flex-1 items-center justify-center text-gray-400">Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<DataEntryPage />} />
-              <Route path="/results" element={<ResultsPage />} />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </PageLayout>
+      <ErrorBoundary>
+        <Suspense fallback={<div className="flex flex-1 items-center justify-center text-gray-400">Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route
+              path="/app"
+              element={
+                <PageLayout>
+                  <DataEntryPage />
+                </PageLayout>
+              }
+            />
+            <Route
+              path="/results"
+              element={
+                <PageLayout>
+                  <ResultsPage />
+                </PageLayout>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 }

@@ -28,5 +28,22 @@
   "emptyGridTitle": "No students yet",
   "emptyGridSubtitle": "Import a file or add rows manually",
   "emptyResultsTitle": "No assignment results",
-  "emptyResultsSubtitle": "Go back and assign students to see results here"
+  "emptyResultsSubtitle": "Go back and assign students to see results here",
+  "landingTagline": "Optimally assign students to balanced classes",
+  "getStarted": "Get Started",
+  "learnMore": "Learn More",
+  "featureSmartTitle": "Smart Assignment",
+  "featureSmartDesc": "Algorithm-based balanced class assignment considering multiple constraints",
+  "featureDragTitle": "Drag & Drop",
+  "featureDragDesc": "Reassign students between classes interactively with drag and drop",
+  "featureExportTitle": "Export Results",
+  "featureExportDesc": "Download your class assignments as an Excel file",
+  "aboutTitle": "About",
+  "about": "About",
+  "howToUseTitle": "How to Use",
+  "howToStep1": "Import a file or manually enter student data into the grid",
+  "howToStep2": "Set the number of classes and run the assignment algorithm",
+  "howToStep3": "Review the results and drag students between classes to reassign",
+  "howToStep4": "Export the final assignment as a spreadsheet",
+  "aboutDescription": "Classroom Assignment is a tool for optimally distributing students into balanced classes. It takes into account gender balance, friend preferences, separation constraints, and academic and behavioral scores to produce fair and effective class assignments."
 }
