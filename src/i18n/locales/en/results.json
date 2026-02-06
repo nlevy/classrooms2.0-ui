@@ -14,5 +14,16 @@
   "overallBalance": "Overall Balance",
   "dragHint": "Drag students between classes to reassign",
   "warningFriendless": "No friends in class",
-  "warningNotWith": "Not-with violation"
+  "warningNotWith": "Not-with violation",
+  "males": "Males",
+  "females": "Females",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "academicPerformance": "Academic Performance",
+  "behavioralPerformance": "Behavioral Performance",
+  "averageAcademicPerformance": "Avg Academic",
+  "averageBehaviouralPerformance": "Avg Behavioural",
+  "view": "View",
+  "close": "Close"
 }

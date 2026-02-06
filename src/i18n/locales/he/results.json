@@ -14,5 +14,16 @@
   "overallBalance": "איזון כללי",
   "dragHint": "גרור תלמידים בין כיתות לשיבוץ מחדש",
   "warningFriendless": "ללא חברים בכיתה",
-  "warningNotWith": "הפרת אילוץ 'לא עם'"
+  "warningNotWith": "הפרת אילוץ 'לא עם'",
+  "males": "בנים",
+  "females": "בנות",
+  "low": "נמוך",
+  "medium": "בינוני",
+  "high": "גבוה",
+  "academicPerformance": "הישגים לימודיים",
+  "behavioralPerformance": "הישגים התנהגותיים",
+  "averageAcademicPerformance": "ממוצע לימודי",
+  "averageBehaviouralPerformance": "ממוצע התנהגות",
+  "view": "הצג",
+  "close": "סגור"
 }
