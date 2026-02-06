@@ -48,7 +48,7 @@ export function ResultsPage() {
     setError(null);
     try {
       const response = await assignStudents(students, classCount);
-      setAssignmentResult(response.classes, response.summaries);
+      setAssignmentResult(response.classes, recalculateSummaries(response.classes));
     } catch (err: unknown) {
       if (err instanceof ApiRequestError) {
         setError(err.apiError);

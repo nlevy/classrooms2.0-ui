@@ -3,6 +3,7 @@ import { useStore } from '../store/index.ts';
 import { assignStudents } from '../api/classrooms-api.ts';
 import { ApiRequestError } from '../api/client.ts';
 import type { ApiError } from '../types/api.ts';
+import { recalculateSummaries } from '../utils/summary-calculator.ts';
 
 export function useAssignment() {
   const students = useStore((s) => s.students);
@@ -17,7 +18,7 @@ export function useAssignment() {
     setError(null);
     try {
       const response = await assignStudents(students, classCount);
-      setAssignmentResult(response.classes, response.summaries);
+      setAssignmentResult(response.classes, recalculateSummaries(response.classes));
       navigate('/results');
     } catch (err: unknown) {
       if (err instanceof ApiRequestError) {
