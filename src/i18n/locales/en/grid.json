@@ -1,0 +1,22 @@
+{
+  "name": "Name",
+  "school": "School",
+  "gender": "Gender",
+  "academicPerformance": "Academic Performance",
+  "behavioralPerformance": "Behavioral Performance",
+  "comments": "Comments",
+  "friend1": "Friend 1",
+  "friend2": "Friend 2",
+  "friend3": "Friend 3",
+  "friend4": "Friend 4",
+  "notWith": "Not With",
+  "clusterId": "Cluster ID",
+  "addRow": "Add Row",
+  "deleteSelected": "Delete Selected",
+  "importFile": "Import File",
+  "male": "Male",
+  "female": "Female",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High"
+}

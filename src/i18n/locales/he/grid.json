@@ -1,0 +1,22 @@
+{
+  "name": "שם",
+  "school": "בית ספר",
+  "gender": "מגדר",
+  "academicPerformance": "הישגים לימודיים",
+  "behavioralPerformance": "התנהגות",
+  "comments": "הערות",
+  "friend1": "חבר 1",
+  "friend2": "חבר 2",
+  "friend3": "חבר 3",
+  "friend4": "חבר 4",
+  "notWith": "לא עם",
+  "clusterId": "מזהה קבוצה",
+  "addRow": "הוסף שורה",
+  "deleteSelected": "מחק נבחרים",
+  "importFile": "ייבוא קובץ",
+  "male": "זכר",
+  "female": "נקבה",
+  "low": "נמוך",
+  "medium": "בינוני",
+  "high": "גבוה"
+}

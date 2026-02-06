@@ -1,0 +1,18 @@
+{
+  "resultsTitle": "תוצאות שיבוץ",
+  "class": "כיתה",
+  "summary": "סיכום",
+  "studentsCount": "תלמידים",
+  "malesCount": "בנים",
+  "averageAcademic": "ממוצע לימודי",
+  "averageBehavioural": "ממוצע התנהגות",
+  "withoutFriends": "ללא חברים",
+  "unwantedMatches": "שיבוצים לא רצויים",
+  "statistics": "סטטיסטיקות",
+  "genderBalance": "איזון מגדרי",
+  "performanceDistribution": "התפלגות הישגים",
+  "overallBalance": "איזון כללי",
+  "dragHint": "גרור תלמידים בין כיתות לשיבוץ מחדש",
+  "warningFriendless": "ללא חברים בכיתה",
+  "warningNotWith": "הפרת אילוץ 'לא עם'"
+}

@@ -1,0 +1,14 @@
+{
+  "appTitle": "שיבוץ כיתות",
+  "language": "שפה",
+  "en": "English",
+  "he": "עברית",
+  "students": "תלמידים",
+  "loading": "טוען...",
+  "assign": "שבץ לכיתות",
+  "numberOfClasses": "מספר כיתות",
+  "backToData": "חזרה לנתונים",
+  "exportCsv": "ייצוא CSV",
+  "resetOriginal": "איפוס לנתונים מקוריים",
+  "rerun": "הרצה מחדש"
+}

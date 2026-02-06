@@ -1,0 +1,14 @@
+{
+  "appTitle": "Classroom Assignment",
+  "language": "Language",
+  "en": "English",
+  "he": "עברית",
+  "students": "students",
+  "loading": "Loading...",
+  "assign": "Assign to Classes",
+  "numberOfClasses": "Number of classes",
+  "backToData": "Back to Data",
+  "exportCsv": "Export CSV",
+  "resetOriginal": "Reset to Original",
+  "rerun": "Re-run Assignment"
+}

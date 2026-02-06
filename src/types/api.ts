@@ -1,0 +1,28 @@
+export type ErrorCode =
+  | 'INVALID_CONTENT_TYPE'
+  | 'MISSING_PARAMETER'
+  | 'INVALID_STUDENT_DATA'
+  | 'EMPTY_STUDENT_DATA'
+  | 'MISSING_REQUIRED_FIELDS'
+  | 'DUPLICATE_STUDENT_NAMES'
+  | 'STUDENT_NO_FRIENDS'
+  | 'UNKNOWN_FRIEND'
+  | 'ISOLATED_STUDENTS'
+  | 'INVALID_CLASS_COUNT'
+  | 'INVALID_STUDENT_COUNT'
+  | 'TOO_MANY_CLASSES'
+  | 'CLASS_SIZE_TOO_SMALL'
+  | 'ASSIGNMENT_FAILED'
+  | 'NO_SOLUTION_FOUND'
+  | 'OPTIMIZATION_TIMEOUT'
+  | 'UNSUPPORTED_LANGUAGE'
+  | 'TEMPLATE_NOT_AVAILABLE'
+  | 'INTERNAL_SERVER_ERROR';
+
+export interface ApiError {
+  error: {
+    code: ErrorCode;
+    params: Record<string, string>;
+    message: string;
+  };
+}

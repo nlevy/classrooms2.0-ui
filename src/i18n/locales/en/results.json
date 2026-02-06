@@ -1,0 +1,18 @@
+{
+  "resultsTitle": "Assignment Results",
+  "class": "Class",
+  "summary": "Summary",
+  "studentsCount": "Students",
+  "malesCount": "Males",
+  "averageAcademic": "Avg Academic",
+  "averageBehavioural": "Avg Behavioural",
+  "withoutFriends": "Without Friends",
+  "unwantedMatches": "Unwanted Matches",
+  "statistics": "Statistics",
+  "genderBalance": "Gender Balance",
+  "performanceDistribution": "Performance Distribution",
+  "overallBalance": "Overall Balance",
+  "dragHint": "Drag students between classes to reassign",
+  "warningFriendless": "No friends in class",
+  "warningNotWith": "Not-with violation"
+}
