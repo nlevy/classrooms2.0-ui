@@ -24,6 +24,7 @@ export interface AssignmentSlice {
   ) => void;
   undoLastMove: () => void;
   resetToOriginal: () => void;
+  setSummaries: (summaries: ClassSummary[]) => void;
   clearAssignment: () => void;
 }
 
@@ -73,6 +74,7 @@ export const createAssignmentSlice: StateCreator<AssignmentSlice> = (set) => ({
         moveHistory: state.moveHistory.slice(0, -1),
       };
     }),
+  setSummaries: (summaries) => set({ summaries }),
   resetToOriginal: () =>
     set((state) => ({
       classes: state.originalClasses

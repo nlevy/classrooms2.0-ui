@@ -28,7 +28,7 @@ export default function BalanceRadar({ summaries }: BalanceRadarProps) {
     { key: 'averageBehaviouralPerformance', label: t('averageBehaviouralPerformance') },
   ], [t]);
 
-  const { data, maxValues } = useMemo(() => {
+  const { data } = useMemo(() => {
     const maxVals: Record<string, number> = {};
     for (const metric of metrics) {
       const key = metric.key as keyof ClassSummary;
