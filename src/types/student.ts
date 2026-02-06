@@ -1,13 +1,15 @@
-export enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
-}
+export const Gender = {
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+} as const;
+export type Gender = (typeof Gender)[keyof typeof Gender];
 
-export enum Grade {
-  LOW = 'LOW',
-  MEDIUM = 'MEDIUM',
-  HIGH = 'HIGH',
-}
+export const Grade = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+} as const;
+export type Grade = (typeof Grade)[keyof typeof Grade];
 
 export interface Student {
   name: string;

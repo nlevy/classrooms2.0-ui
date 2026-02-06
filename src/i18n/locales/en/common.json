@@ -10,5 +10,12 @@
   "backToData": "Back to Data",
   "exportCsv": "Export CSV",
   "resetOriginal": "Reset to Original",
-  "rerun": "Re-run Assignment"
+  "rerun": "Re-run Assignment",
+  "importFile": "Import File",
+  "dragDropFile": "Drag & drop a file here, or click to browse",
+  "selectedFile": "Selected file",
+  "parsing": "Parsing file...",
+  "studentsFound": "students found",
+  "confirmImport": "Import",
+  "cancel": "Cancel"
 }

@@ -1,12 +1,14 @@
 import type { ApiError } from '../types/api';
 
 export class ApiRequestError extends Error {
-  constructor(
-    public readonly status: number,
-    public readonly apiError: ApiError,
-  ) {
+  readonly status: number;
+  readonly apiError: ApiError;
+
+  constructor(status: number, apiError: ApiError) {
     super(apiError.error.message);
     this.name = 'ApiRequestError';
+    this.status = status;
+    this.apiError = apiError;
   }
 }
 

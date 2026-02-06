@@ -10,5 +10,12 @@
   "backToData": "חזרה לנתונים",
   "exportCsv": "ייצוא CSV",
   "resetOriginal": "איפוס לנתונים מקוריים",
-  "rerun": "הרצה מחדש"
+  "rerun": "הרצה מחדש",
+  "importFile": "ייבוא קובץ",
+  "dragDropFile": "גרור קובץ לכאן, או לחץ לבחירה",
+  "selectedFile": "קובץ נבחר",
+  "parsing": "מעבד קובץ...",
+  "studentsFound": "תלמידים נמצאו",
+  "confirmImport": "ייבוא",
+  "cancel": "ביטול"
 }
