@@ -18,5 +18,6 @@
   "female": "נקבה",
   "low": "נמוך",
   "medium": "בינוני",
-  "high": "גבוה"
+  "high": "גבוה",
+  "duplicateStudent": "התלמיד \"{{name}}\" מבית ספר \"{{school}}\" כבר קיים"
 }

@@ -17,5 +17,9 @@
   "parsing": "מעבד קובץ...",
   "studentsFound": "תלמידים נמצאו",
   "confirmImport": "ייבוא",
+  "addToExisting": "הוסף לקיימים",
+  "replaceExisting": "החלף הכל",
+  "duplicateWarning": "{{count}} תלמידים כבר קיימים וידרסו:",
+  "confirmOverride": "דרוס והוסף",
   "cancel": "ביטול"
 }

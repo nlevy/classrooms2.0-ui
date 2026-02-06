@@ -17,5 +17,9 @@
   "parsing": "Parsing file...",
   "studentsFound": "students found",
   "confirmImport": "Import",
+  "addToExisting": "Add to Existing",
+  "replaceExisting": "Replace All",
+  "duplicateWarning": "{{count}} student(s) already exist and will be overridden:",
+  "confirmOverride": "Override & Add",
   "cancel": "Cancel"
 }

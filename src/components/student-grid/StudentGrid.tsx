@@ -25,6 +25,7 @@ export function StudentGrid({ onImport }: StudentGridProps) {
     onCellValueChanged,
     onAddRow,
     onDeleteSelected,
+    duplicateWarning,
   } = useStudentGrid();
 
   const onGridReady = useCallback(
@@ -42,6 +43,11 @@ export function StudentGrid({ onImport }: StudentGridProps) {
         onDeleteSelected={onDeleteSelected}
         onImport={onImport}
       />
+      {duplicateWarning && (
+        <div className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-800">
+          {duplicateWarning}
+        </div>
+      )}
       <div className="min-h-0 flex-1">
         <AgGridReact<Student>
           theme={themeQuartz}

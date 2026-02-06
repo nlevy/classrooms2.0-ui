@@ -1,8 +1,9 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useMemo } from 'react';
 import type { DragEvent, ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useStore } from '../../store/index.ts';
 import { useFileParser } from './useFileParser.ts';
+import type { Student } from '../../types/student.ts';
 
 interface FileImportDialogProps {
   open: boolean;
@@ -11,17 +12,43 @@ interface FileImportDialogProps {
 
 const ACCEPTED_EXTENSIONS = '.csv,.xlsx,.xls';
 
+function studentKey(s: Student): string {
+  return `${s.name}\0${s.school}`;
+}
+
+function mergeStudents(existing: Student[], incoming: Student[]): Student[] {
+  const merged = new Map<string, Student>();
+  for (const s of existing) {
+    merged.set(studentKey(s), s);
+  }
+  for (const s of incoming) {
+    merged.set(studentKey(s), s);
+  }
+  return Array.from(merged.values());
+}
+
 export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
   const { t } = useTranslation();
   const setStudents = useStore((s) => s.setStudents);
+  const existingStudents = useStore((s) => s.students);
   const { parsedStudents, error, isLoading, parseFile, reset } = useFileParser();
   const [isDragging, setIsDragging] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [showDuplicateWarning, setShowDuplicateWarning] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const duplicateNames = useMemo(() => {
+    if (existingStudents.length === 0 || parsedStudents.length === 0) return [];
+    const existingKeys = new Set(existingStudents.map(studentKey));
+    return parsedStudents
+      .filter((s) => existingKeys.has(studentKey(s)))
+      .map((s) => s.name);
+  }, [existingStudents, parsedStudents]);
 
   const handleFile = useCallback(
     (file: File) => {
       setFileName(file.name);
+      setShowDuplicateWarning(false);
       parseFile(file);
     },
     [parseFile],
@@ -55,17 +82,30 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
     [handleFile],
   );
 
-  const handleConfirm = useCallback(() => {
+  const handleReplace = useCallback(() => {
     if (parsedStudents.length > 0) {
       setStudents(parsedStudents);
       handleClose();
     }
   }, [parsedStudents, setStudents]);
 
+  const handleAdd = useCallback(() => {
+    if (parsedStudents.length === 0) return;
+
+    if (duplicateNames.length > 0 && !showDuplicateWarning) {
+      setShowDuplicateWarning(true);
+      return;
+    }
+
+    setStudents(mergeStudents(existingStudents, parsedStudents));
+    handleClose();
+  }, [parsedStudents, existingStudents, duplicateNames, showDuplicateWarning, setStudents]);
+
   const handleClose = useCallback(() => {
     reset();
     setFileName(null);
     setIsDragging(false);
+    setShowDuplicateWarning(false);
     if (fileInputRef.current) fileInputRef.current.value = '';
     onClose();
   }, [onClose, reset]);
@@ -136,6 +176,17 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
           </p>
         )}
 
+        {showDuplicateWarning && (
+          <div className="mt-3 rounded-md border border-amber-300 bg-amber-50 p-3">
+            <p className="text-sm font-medium text-amber-800">
+              {t('duplicateWarning', { count: duplicateNames.length })}
+            </p>
+            <p className="mt-1 max-h-20 overflow-y-auto text-xs text-amber-700">
+              {duplicateNames.join(', ')}
+            </p>
+          </div>
+        )}
+
         <div className="mt-6 flex justify-end gap-3">
           <button
             onClick={handleClose}
@@ -143,13 +194,32 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
           >
             {t('cancel')}
           </button>
-          <button
-            onClick={handleConfirm}
-            disabled={parsedStudents.length === 0 || isLoading}
-            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {t('confirmImport')}
-          </button>
+          {existingStudents.length > 0 && parsedStudents.length > 0 ? (
+            <>
+              <button
+                onClick={handleAdd}
+                disabled={isLoading}
+                className="rounded-md border border-blue-600 px-4 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {showDuplicateWarning ? t('confirmOverride') : t('addToExisting')}
+              </button>
+              <button
+                onClick={handleReplace}
+                disabled={isLoading}
+                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {t('replaceExisting')}
+              </button>
+            </>
+          ) : (
+            <button
+              onClick={handleReplace}
+              disabled={parsedStudents.length === 0 || isLoading}
+              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {t('confirmImport')}
+            </button>
+          )}
         </div>
       </div>
     </div>

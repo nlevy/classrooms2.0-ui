@@ -18,5 +18,6 @@
   "female": "Female",
   "low": "Low",
   "medium": "Medium",
-  "high": "High"
+  "high": "High",
+  "duplicateStudent": "Student \"{{name}}\" from school \"{{school}}\" already exists"
 }
