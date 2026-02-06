@@ -11,6 +11,7 @@ import type { Student } from '../../types/student';
 import { GridToolbar } from './GridToolbar';
 import { EmptyState } from '../common/EmptyState';
 import { useStudentGrid } from './useStudentGrid';
+import { exportTemplate } from '../../utils/template-export';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -19,7 +20,7 @@ interface StudentGridProps {
 }
 
 export function StudentGrid({ onImport }: StudentGridProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     gridApiRef,
     students,
@@ -30,6 +31,10 @@ export function StudentGrid({ onImport }: StudentGridProps) {
     onDeleteSelected,
     duplicateWarning,
   } = useStudentGrid();
+
+  const handleDownloadTemplate = useCallback(() => {
+    exportTemplate(i18n.language);
+  }, [i18n.language]);
 
   const onGridReady = useCallback(
     (params: GridReadyEvent<Student>) => {
@@ -45,6 +50,7 @@ export function StudentGrid({ onImport }: StudentGridProps) {
         onAddRow={onAddRow}
         onDeleteSelected={onDeleteSelected}
         onImport={onImport}
+        onDownloadTemplate={handleDownloadTemplate}
       />
       {duplicateWarning && (
         <div className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-800">

@@ -5,9 +5,10 @@ interface GridToolbarProps {
   onAddRow: () => void;
   onDeleteSelected: () => void;
   onImport?: () => void;
+  onDownloadTemplate?: () => void;
 }
 
-export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport }: GridToolbarProps) {
+export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport, onDownloadTemplate }: GridToolbarProps) {
   const { t } = useTranslation('grid');
   const { t: tCommon } = useTranslation();
 
@@ -20,6 +21,15 @@ export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport
           className="rounded-md border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100"
         >
           {tCommon('importFile')}
+        </button>
+      )}
+      {onDownloadTemplate && (
+        <button
+          type="button"
+          onClick={onDownloadTemplate}
+          className="rounded-md border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-sm font-medium text-indigo-700 transition-colors hover:bg-indigo-100"
+        >
+          {tCommon('downloadTemplate')}
         </button>
       )}
       <button

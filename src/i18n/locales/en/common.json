@@ -12,6 +12,7 @@
   "resetOriginal": "Reset to Original",
   "rerun": "Re-run Assignment",
   "importFile": "Import File",
+  "downloadTemplate": "Download Template",
   "dragDropFile": "Drag & drop a file here, or click to browse",
   "selectedFile": "Selected file",
   "parsing": "Parsing file...",
