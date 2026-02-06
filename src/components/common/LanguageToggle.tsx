@@ -14,7 +14,7 @@ export function LanguageToggle() {
   return (
     <button
       onClick={toggle}
-      className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50"
+      className="rounded-lg border border-white/30 bg-white/15 px-3 py-1.5 text-sm font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/25"
     >
       {i18n.language === 'en' ? 'עברית' : 'English'}
     </button>

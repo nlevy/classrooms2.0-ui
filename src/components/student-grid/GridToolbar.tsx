@@ -12,12 +12,12 @@ export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport
   const { t: tCommon } = useTranslation();
 
   return (
-    <div className="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
+    <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 bg-white px-4 py-2">
       {onImport && (
         <button
           type="button"
           onClick={onImport}
-          className="rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700"
+          className="rounded-md border border-blue-200 bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100"
         >
           {tCommon('importFile')}
         </button>
@@ -25,18 +25,18 @@ export function GridToolbar({ studentCount, onAddRow, onDeleteSelected, onImport
       <button
         type="button"
         onClick={onAddRow}
-        className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+        className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
       >
         {t('addRow')}
       </button>
       <button
         type="button"
         onClick={onDeleteSelected}
-        className="rounded bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700"
+        className="rounded-md border border-red-200 bg-white px-3 py-1.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50"
       >
         {t('deleteSelected')}
       </button>
-      <span className="ms-auto text-sm text-gray-500">
+      <span className="ms-auto rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-700">
         {studentCount} {studentCount === 1 ? 'student' : 'students'}
       </span>
     </div>

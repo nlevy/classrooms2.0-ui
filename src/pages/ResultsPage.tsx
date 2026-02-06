@@ -60,39 +60,40 @@ export function ResultsPage() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="flex flex-wrap items-center gap-3 border-b border-gray-200 bg-white px-4 py-2">
+      <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 bg-white px-4 py-2">
         <button
           onClick={() => navigate('/')}
-          className="rounded bg-gray-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-gray-700"
+          className="rounded-md border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           {t('backToData')}
         </button>
         <button
           onClick={() => exportAssignmentCsv(classes, summaries)}
-          className="rounded bg-green-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-green-700"
+          className="rounded-md border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-sm font-medium text-emerald-700 transition-colors hover:bg-emerald-100"
         >
           {t('exportCsv')}
         </button>
         <button
           onClick={handleReset}
-          className="rounded bg-amber-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-amber-700"
+          className="rounded-md border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 transition-colors hover:bg-amber-100"
         >
           {t('resetOriginal')}
         </button>
         <button
           onClick={handleRerun}
-          className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+          className="rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-1.5 text-sm font-medium text-white shadow-sm transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow"
         >
           {t('rerun')}
         </button>
       </div>
 
       <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <div className="min-h-0 overflow-y-auto p-4 lg:flex-[3]">
+        <div className="min-h-0 overflow-y-auto p-4 lg:flex-[4]">
           <ClassCardGrid />
         </div>
-        <div className="min-h-0 overflow-y-auto border-s border-gray-200 bg-white p-4 lg:flex-[2]">
-          <h2 className="mb-4 text-lg font-semibold text-gray-800">
+        <div className="min-h-0 overflow-y-auto border-s border-gray-200 bg-slate-50 p-4 lg:flex-[2]">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-800">
+            <span className="inline-block h-5 w-1 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600"></span>
             {tResults('statistics')}
           </h2>
           <SummaryTable summaries={summaries} />

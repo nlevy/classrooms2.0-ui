@@ -27,8 +27,10 @@ export function StudentChip({
     ? { transform: CSS.Translate.toString(transform) }
     : undefined;
 
-  const bgColor =
-    student.gender === Gender.MALE ? 'bg-blue-100' : 'bg-pink-100';
+  const chipStyle =
+    student.gender === Gender.MALE
+      ? 'bg-blue-100 text-blue-800 border-blue-200'
+      : 'bg-pink-100 text-pink-800 border-pink-200';
 
   const hasWarning = isFriendless || hasNotWithViolation;
 
@@ -38,7 +40,7 @@ export function StudentChip({
       style={style}
       {...listeners}
       {...attributes}
-      className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${bgColor} cursor-grab select-none ${isDragging ? 'opacity-50 shadow-lg' : ''} ${hasWarning ? 'ring-2 ring-amber-400' : ''}`}
+      className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-medium ${chipStyle} cursor-grab select-none transition-shadow ${isDragging ? 'opacity-50 shadow-lg' : 'hover:shadow'} ${hasWarning ? 'ring-2 ring-amber-400' : ''}`}
       title={
         hasWarning
           ? [

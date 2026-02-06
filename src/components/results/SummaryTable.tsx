@@ -32,17 +32,17 @@ export function SummaryTable({ summaries }: SummaryTableProps) {
   const { t } = useTranslation('results');
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
       <table className="w-full border-collapse text-sm">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="border border-gray-300 px-4 py-2 text-start font-semibold text-gray-700">
+          <tr className="bg-gradient-to-r from-blue-500 to-indigo-600">
+            <th className="px-4 py-2.5 text-start text-xs font-semibold uppercase tracking-wider text-white">
               {t('summary')}
             </th>
             {summaries.map((s) => (
               <th
                 key={s.classNumber}
-                className="border border-gray-300 px-4 py-2 text-center font-semibold text-gray-700"
+                className="px-4 py-2.5 text-center text-xs font-semibold uppercase tracking-wider text-white"
               >
                 {t('class')} {s.classNumber}
               </th>
@@ -53,9 +53,9 @@ export function SummaryTable({ summaries }: SummaryTableProps) {
           {metricRows.map((metric, rowIndex) => (
             <tr
               key={metric.labelKey}
-              className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+              className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50/60'}
             >
-              <td className="border border-gray-300 px-4 py-2 text-start font-medium text-gray-700">
+              <td className="border-t border-gray-100 px-4 py-2 text-start font-medium text-gray-700">
                 {t(metric.labelKey)}
               </td>
               {summaries.map((s) => {
@@ -63,8 +63,8 @@ export function SummaryTable({ summaries }: SummaryTableProps) {
                 return (
                   <td
                     key={s.classNumber}
-                    className={`border border-gray-300 px-4 py-2 text-center ${
-                      warn ? 'bg-red-100 font-semibold text-red-700' : 'text-gray-800'
+                    className={`border-t border-gray-100 px-4 py-2 text-center ${
+                      warn ? 'bg-red-50 font-semibold text-red-600' : 'text-gray-800'
                     }`}
                   >
                     {metric.getValue(s)}

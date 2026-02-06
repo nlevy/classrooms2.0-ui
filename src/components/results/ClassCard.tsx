@@ -42,34 +42,36 @@ export function ClassCard({ classId, students, allClasses: _allClasses }: ClassC
         onKeyDown={(e) => { if (e.key === 'Enter') setIsDetailOpen(true); }}
         tabIndex={0}
         role="button"
-        className={`rounded-lg border-2 bg-white p-4 shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${isOver ? 'border-blue-400 bg-blue-50' : 'border-gray-200'}`}
+        className={`overflow-hidden rounded-lg border bg-white shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-blue-400 ${isOver ? 'border-blue-400 bg-blue-50 shadow-md' : 'border-gray-200 hover:shadow-md'}`}
       >
-        <div className="mb-3 flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">
+        <div className="flex items-center justify-between bg-gradient-to-r from-blue-400 to-indigo-400 px-4 py-2">
+          <h3 className="text-sm font-semibold text-white">
             {t('class')} {classId}
           </h3>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsDetailOpen(true)}
-              className="rounded-md border border-gray-300 px-2 py-1 text-xs font-medium text-gray-600 hover:bg-gray-100"
+              className="rounded-md border border-white/30 bg-white/15 px-2 py-0.5 text-xs font-medium text-white transition-colors hover:bg-white/25"
             >
               {t('view')}
             </button>
-            <span className="text-sm text-gray-500">
+            <span className="text-xs font-medium text-blue-100">
               {students.length} {t('studentsCount').toLowerCase()}
             </span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {students.map((student) => (
-            <StudentChip
-              key={student.name}
-              student={student}
-              classId={classId}
-              isFriendless={!hasFriendInClass(student, students)}
-              hasNotWithViolation={hasNotWithViolation(student, students)}
-            />
-          ))}
+        <div className="p-4">
+          <div className="flex flex-wrap gap-2">
+            {students.map((student) => (
+              <StudentChip
+                key={student.name}
+                student={student}
+                classId={classId}
+                isFriendless={!hasFriendInClass(student, students)}
+                hasNotWithViolation={hasNotWithViolation(student, students)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

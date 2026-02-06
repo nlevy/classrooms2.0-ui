@@ -49,17 +49,17 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
         className="mx-4 max-h-[85vh] w-full max-w-6xl overflow-hidden rounded-lg bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b px-6 py-4">
-          <h2 className="text-lg font-semibold text-gray-800">
+        <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4">
+          <h2 className="text-lg font-semibold text-white">
             {t('class')} {classId}
-            <span className="ms-3 text-sm font-normal text-gray-500">
+            <span className="ms-3 text-sm font-normal text-blue-100">
               {students.length} {t('studentsCount').toLowerCase()}
             </span>
           </h2>
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            className="rounded-md p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            className="rounded-md p-1 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
             aria-label={t('close')}
           >
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +71,7 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
         <div className="overflow-auto p-6" style={{ maxHeight: 'calc(85vh - 73px)' }}>
           <table className="w-full border-collapse text-start">
             <thead>
-              <tr className="border-b bg-gray-50 text-start text-xs font-medium uppercase tracking-wider text-gray-500">
+              <tr className="border-b bg-slate-50 text-start text-xs font-medium uppercase tracking-wider text-slate-500">
                 <th className="px-3 py-2 text-start">{tGrid('name')}</th>
                 <th className="px-3 py-2 text-start">{tGrid('school')}</th>
                 <th className="px-3 py-2 text-start">{tGrid('gender')}</th>

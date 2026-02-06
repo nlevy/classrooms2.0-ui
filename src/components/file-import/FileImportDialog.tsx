@@ -118,7 +118,8 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
       onKeyDown={(e) => { if (e.key === 'Escape') handleClose(); }}
     >
       <div className="mx-4 w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
-        <h2 className="mb-4 text-lg font-semibold text-gray-800">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-gray-800">
+          <span className="inline-block h-5 w-1 rounded-full bg-gradient-to-b from-blue-500 to-indigo-600"></span>
           {t('importFile')}
         </h2>
 
@@ -134,7 +135,7 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
           }`}
         >
           <svg
-            className="mb-3 h-10 w-10 text-gray-400"
+            className="mb-3 h-10 w-10 text-blue-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -209,7 +210,7 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
               <button
                 onClick={handleReplace}
                 disabled={isLoading}
-                className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-50 disabled:from-gray-300 disabled:to-gray-300"
               >
                 {t('replaceExisting')}
               </button>
@@ -218,7 +219,7 @@ export function FileImportDialog({ open, onClose }: FileImportDialogProps) {
             <button
               onClick={handleReplace}
               disabled={parsedStudents.length === 0 || isLoading}
-              className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-md bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:from-blue-700 hover:to-indigo-700 hover:shadow disabled:cursor-not-allowed disabled:opacity-50 disabled:from-gray-300 disabled:to-gray-300"
             >
               {t('confirmImport')}
             </button>
