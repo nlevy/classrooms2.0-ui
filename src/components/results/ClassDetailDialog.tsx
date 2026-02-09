@@ -62,9 +62,9 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
         <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4">
           <div className="flex items-center gap-4">
             <h2 className="text-lg font-semibold text-white">
-              {t('class')} {classId}
+              {t('class')} <bdi>{classId}</bdi>
               <span className="ms-3 text-sm font-normal text-blue-100">
-                {students.length} {t('studentsCount').toLowerCase()}
+                <bdi>{students.length}</bdi> {t('studentsCount').toLowerCase()}
               </span>
             </h2>
             <div className="flex gap-1">
