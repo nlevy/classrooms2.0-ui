@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { ReactFlow, type Node, type Edge, MarkerType } from '@xyflow/react';
-import dagre from '@dagrejs/dagre';
 import { useTranslation } from 'react-i18next';
 import type { Student } from '../../types/student';
 import { FriendGraphNode, type FriendNodeData } from './FriendGraphNode';
@@ -61,33 +60,85 @@ function buildGraph(students: Student[], classmateNames: Set<string>) {
     };
   });
 
-  return { nodes, edges };
+  return { nodes, edges, friendEdgeSet };
 }
 
-function applyDagreLayout(nodes: Node[], edges: Edge[]): Node[] {
-  const g = new dagre.graphlib.Graph();
-  g.setDefaultEdgeLabel(() => ({}));
-  g.setGraph({ rankdir: 'LR', ranksep: 80, nodesep: 50 });
+/**
+ * Simple force-directed layout for small graphs (classroom-sized, ~15-30 nodes).
+ * Starts from a circular layout and runs repulsion/attraction iterations.
+ */
+function applyForceLayout(
+  nodes: Node[],
+  edges: Edge[],
+): Node[] {
+  const n = nodes.length;
+  if (n === 0) return nodes;
+  if (n === 1) return [{ ...nodes[0], position: { x: 0, y: 0 } }];
 
-  for (const node of nodes) {
-    g.setNode(node.id, { width: NODE_WIDTH, height: NODE_HEIGHT });
+  const radius = Math.max(150, n * 30);
+  const positions: { x: number; y: number }[] = nodes.map((_, i) => ({
+    x: radius * Math.cos((2 * Math.PI * i) / n),
+    y: radius * Math.sin((2 * Math.PI * i) / n),
+  }));
+
+  const idIndex = new Map(nodes.map((node, i) => [node.id, i]));
+
+  const edgePairs = edges
+    .map((e) => [idIndex.get(e.source)!, idIndex.get(e.target)!] as [number, number])
+    .filter(([a, b]) => a !== undefined && b !== undefined);
+
+  const REPULSION = 8000;
+  const ATTRACTION = 0.005;
+  const ITERATIONS = 120;
+  const DAMPING = 0.9;
+
+  const vx = new Float64Array(n);
+  const vy = new Float64Array(n);
+
+  for (let iter = 0; iter < ITERATIONS; iter++) {
+    const cooling = 1 - iter / ITERATIONS;
+
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const dx = positions[i].x - positions[j].x;
+        const dy = positions[i].y - positions[j].y;
+        const distSq = dx * dx + dy * dy + 1;
+        const force = REPULSION / distSq;
+        const fx = force * dx;
+        const fy = force * dy;
+        vx[i] += fx;
+        vy[i] += fy;
+        vx[j] -= fx;
+        vy[j] -= fy;
+      }
+    }
+
+    for (const [si, ti] of edgePairs) {
+      const dx = positions[ti].x - positions[si].x;
+      const dy = positions[ti].y - positions[si].y;
+      const fx = ATTRACTION * dx;
+      const fy = ATTRACTION * dy;
+      vx[si] += fx;
+      vy[si] += fy;
+      vx[ti] -= fx;
+      vy[ti] -= fy;
+    }
+
+    for (let i = 0; i < n; i++) {
+      positions[i].x += vx[i] * cooling;
+      positions[i].y += vy[i] * cooling;
+      vx[i] *= DAMPING;
+      vy[i] *= DAMPING;
+    }
   }
-  for (const edge of edges) {
-    g.setEdge(edge.source, edge.target);
-  }
 
-  dagre.layout(g);
-
-  return nodes.map((node) => {
-    const pos = g.node(node.id);
-    return {
-      ...node,
-      position: {
-        x: pos.x - NODE_WIDTH / 2,
-        y: pos.y - NODE_HEIGHT / 2,
-      },
-    };
-  });
+  return nodes.map((node, i) => ({
+    ...node,
+    position: {
+      x: positions[i].x - NODE_WIDTH / 2,
+      y: positions[i].y - NODE_HEIGHT / 2,
+    },
+  }));
 }
 
 export function FriendGraph({ students, classmateNames }: FriendGraphProps) {
@@ -95,7 +146,7 @@ export function FriendGraph({ students, classmateNames }: FriendGraphProps) {
 
   const { nodes, edges } = useMemo(() => {
     const { nodes: rawNodes, edges } = buildGraph(students, classmateNames);
-    const nodes = applyDagreLayout(rawNodes, edges);
+    const nodes = applyForceLayout(rawNodes, edges);
     return { nodes, edges };
   }, [students, classmateNames]);
 
