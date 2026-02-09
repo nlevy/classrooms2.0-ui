@@ -56,7 +56,7 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
       onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}
     >
       <div
-        className="mx-4 flex max-h-[85vh] w-full max-w-6xl flex-col overflow-hidden rounded-lg bg-white shadow-xl"
+        className="mx-4 flex h-[85vh] w-full max-w-6xl flex-col overflow-hidden rounded-lg bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4">
@@ -89,7 +89,7 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
         </div>
 
         {tab === 'table' ? (
-          <div className="overflow-auto p-6" style={{ maxHeight: 'calc(85vh - 73px)' }}>
+          <div className="min-h-0 flex-1 overflow-auto p-6">
             <table className="w-full border-collapse text-start">
               <thead>
                 <tr className="border-b bg-slate-50 text-start text-xs font-medium uppercase tracking-wider text-slate-500">
@@ -128,7 +128,7 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
             </table>
           </div>
         ) : (
-          <div className="min-h-0 flex-1" style={{ height: 'calc(85vh - 73px)' }}>
+          <div className="min-h-0 flex-1">
             <FriendGraph students={students} classmateNames={classmateNames} />
           </div>
         )}
