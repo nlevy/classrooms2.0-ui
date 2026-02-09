@@ -25,5 +25,9 @@
   "averageAcademicPerformance": "Avg Academic",
   "averageBehaviouralPerformance": "Avg Behavioural",
   "view": "View",
-  "close": "Close"
+  "close": "Close",
+  "mutualRequest": "Mutual request",
+  "oneWayRequest": "One-way request",
+  "male": "Male",
+  "female": "Female"
 }

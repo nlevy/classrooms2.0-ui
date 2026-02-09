@@ -1,6 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Student } from '../../types/student.ts';
+import { FriendGraph } from './FriendGraph.tsx';
 
 interface ClassDetailDialogProps {
   open: boolean;
@@ -28,8 +29,10 @@ function FriendCell({ friendName, classmateNames }: { friendName: string; classm
 
 export function ClassDetailDialog({ open, onClose, classId, students, classmateNames }: ClassDetailDialogProps) {
   const { t } = useTranslation('results');
+  const { t: tCommon } = useTranslation();
   const { t: tGrid } = useTranslation('grid');
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [tab, setTab] = useState<'table' | 'graph'>('table');
 
   useEffect(() => {
     if (open) {
@@ -39,6 +42,13 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
 
   if (!open) return null;
 
+  const tabClass = (active: boolean) =>
+    `rounded-md px-3 py-1 text-sm font-medium transition-colors ${
+      active
+        ? 'bg-white/25 text-white'
+        : 'text-white/70 hover:bg-white/15 hover:text-white'
+    }`;
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
@@ -46,16 +56,26 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
       onKeyDown={(e) => { if (e.key === 'Escape') onClose(); }}
     >
       <div
-        className="mx-4 max-h-[85vh] w-full max-w-6xl overflow-hidden rounded-lg bg-white shadow-xl"
+        className="mx-4 flex max-h-[85vh] w-full max-w-6xl flex-col overflow-hidden rounded-lg bg-white shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4">
-          <h2 className="text-lg font-semibold text-white">
-            {t('class')} {classId}
-            <span className="ms-3 text-sm font-normal text-blue-100">
-              {students.length} {t('studentsCount').toLowerCase()}
-            </span>
-          </h2>
+          <div className="flex items-center gap-4">
+            <h2 className="text-lg font-semibold text-white">
+              {t('class')} {classId}
+              <span className="ms-3 text-sm font-normal text-blue-100">
+                {students.length} {t('studentsCount').toLowerCase()}
+              </span>
+            </h2>
+            <div className="flex gap-1">
+              <button type="button" onClick={() => setTab('table')} className={tabClass(tab === 'table')}>
+                {tCommon('tableView')}
+              </button>
+              <button type="button" onClick={() => setTab('graph')} className={tabClass(tab === 'graph')}>
+                {tCommon('graphView')}
+              </button>
+            </div>
+          </div>
           <button
             ref={closeButtonRef}
             onClick={onClose}
@@ -68,44 +88,50 @@ export function ClassDetailDialog({ open, onClose, classId, students, classmateN
           </button>
         </div>
 
-        <div className="overflow-auto p-6" style={{ maxHeight: 'calc(85vh - 73px)' }}>
-          <table className="w-full border-collapse text-start">
-            <thead>
-              <tr className="border-b bg-slate-50 text-start text-xs font-medium uppercase tracking-wider text-slate-500">
-                <th className="px-3 py-2 text-start">{tGrid('name')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('school')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('gender')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('academicPerformance')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('behavioralPerformance')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('comments')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('friend1')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('friend2')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('friend3')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('friend4')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('notWith')}</th>
-                <th className="px-3 py-2 text-start">{tGrid('clusterId')}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {students.map((student) => (
-                <tr key={student.name} className="border-b last:border-b-0 hover:bg-gray-50">
-                  <td className="px-3 py-2 text-sm font-medium text-gray-900">{student.name}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{student.school}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.gender.toLowerCase())}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.academicPerformance.toLowerCase())}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.behavioralPerformance.toLowerCase())}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{student.comments}</td>
-                  <FriendCell friendName={student.friend1} classmateNames={classmateNames} />
-                  <FriendCell friendName={student.friend2} classmateNames={classmateNames} />
-                  <FriendCell friendName={student.friend3} classmateNames={classmateNames} />
-                  <FriendCell friendName={student.friend4} classmateNames={classmateNames} />
-                  <td className="px-3 py-2 text-sm text-gray-700">{student.notWith || '—'}</td>
-                  <td className="px-3 py-2 text-sm text-gray-700">{student.clusterId ?? '—'}</td>
+        {tab === 'table' ? (
+          <div className="overflow-auto p-6" style={{ maxHeight: 'calc(85vh - 73px)' }}>
+            <table className="w-full border-collapse text-start">
+              <thead>
+                <tr className="border-b bg-slate-50 text-start text-xs font-medium uppercase tracking-wider text-slate-500">
+                  <th className="px-3 py-2 text-start">{tGrid('name')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('school')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('gender')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('academicPerformance')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('behavioralPerformance')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('comments')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('friend1')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('friend2')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('friend3')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('friend4')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('notWith')}</th>
+                  <th className="px-3 py-2 text-start">{tGrid('clusterId')}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {students.map((student) => (
+                  <tr key={student.name} className="border-b last:border-b-0 hover:bg-gray-50">
+                    <td className="px-3 py-2 text-sm font-medium text-gray-900">{student.name}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{student.school}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.gender.toLowerCase())}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.academicPerformance.toLowerCase())}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{tGrid(student.behavioralPerformance.toLowerCase())}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{student.comments}</td>
+                    <FriendCell friendName={student.friend1} classmateNames={classmateNames} />
+                    <FriendCell friendName={student.friend2} classmateNames={classmateNames} />
+                    <FriendCell friendName={student.friend3} classmateNames={classmateNames} />
+                    <FriendCell friendName={student.friend4} classmateNames={classmateNames} />
+                    <td className="px-3 py-2 text-sm text-gray-700">{student.notWith || '—'}</td>
+                    <td className="px-3 py-2 text-sm text-gray-700">{student.clusterId ?? '—'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="min-h-0 flex-1" style={{ height: 'calc(85vh - 73px)' }}>
+            <FriendGraph students={students} classmateNames={classmateNames} />
+          </div>
+        )}
       </div>
     </div>
   );
