@@ -22,6 +22,8 @@
   "replaceExisting": "Replace All",
   "duplicateWarning": "{{count}} student(s) already exist and will be overridden:",
   "confirmOverride": "Override & Add",
+  "tableView": "Table",
+  "graphView": "Graph",
   "cancel": "Cancel",
   "errorBoundaryTitle": "Something went wrong",
   "errorBoundaryMessage": "An unexpected error occurred. Please reload the page to continue.",

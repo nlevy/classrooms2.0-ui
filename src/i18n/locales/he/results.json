@@ -25,5 +25,9 @@
   "averageAcademicPerformance": "ממוצע לימודי",
   "averageBehaviouralPerformance": "ממוצע התנהגות",
   "view": "הצג",
-  "close": "סגור"
+  "close": "סגור",
+  "mutualRequest": "בקשה הדדית",
+  "oneWayRequest": "בקשה חד-כיוונית",
+  "male": "בן",
+  "female": "בת"
 }

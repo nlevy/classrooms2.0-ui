@@ -22,6 +22,8 @@
   "replaceExisting": "החלף הכל",
   "duplicateWarning": "{{count}} תלמידים כבר קיימים וידרסו:",
   "confirmOverride": "דרוס והוסף",
+  "tableView": "טבלה",
+  "graphView": "גרף",
   "cancel": "ביטול",
   "errorBoundaryTitle": "משהו השתבש",
   "errorBoundaryMessage": "אירעה שגיאה בלתי צפויה. אנא טען מחדש את הדף כדי להמשיך.",

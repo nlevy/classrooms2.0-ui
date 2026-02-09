@@ -16,6 +16,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@tailwindcss/vite": "^4.1.18",
+    "@xyflow/react": "^12.10.0",
     "ag-grid-community": "^35.0.1",
     "ag-grid-react": "^35.0.1",
     "i18next": "^25.8.4",
